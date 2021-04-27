@@ -68,5 +68,18 @@ class MainActivity : AppCompatActivity() {
                 println("Completed Observable.")
             }
         }
+
+        //Subscribe with lambda
+        val lObservable = Observable.just(1, 2, 3)
+        lObservable.subscribe() //Without any callback
+        lObservable.subscribe { //onNext
+        }
+        lObservable.subscribe ({ //onNext
+        }, {    //onError
+        })
+        lObservable.subscribe ({ //onNext
+        }, {    //onError
+        }, {    //onComplete
+        })
     }
 }
