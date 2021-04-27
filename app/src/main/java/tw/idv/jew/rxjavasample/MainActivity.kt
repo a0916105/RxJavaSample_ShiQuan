@@ -5,6 +5,7 @@ import android.os.Bundle
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,5 +37,17 @@ class MainActivity : AppCompatActivity() {
         val listObservable = Observable.fromArray(list)
 
         val justObservable = Observable.fromArray("John", "Marry")
+
+        //Create
+        val observable = Observable.create<String> {
+            try {
+                it.onNext("John")
+                it.onNext("Marry")
+                it.onComplete()
+            }catch (e: Exception){
+                it.onError(e)
+            }
+            it.onComplete()
+        }
     }
 }
