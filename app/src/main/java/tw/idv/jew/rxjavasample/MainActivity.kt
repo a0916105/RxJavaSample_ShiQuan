@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                override fun onNext(t: Int?) {
-                    println(t)
+                override fun onNext(i: Int?) {
+                    println(i)
                 }
 
                 override fun onError(e: Throwable) {
@@ -48,6 +48,25 @@ class MainActivity : AppCompatActivity() {
                 it.onError(e)
             }
             it.onComplete()
+        }
+
+        //Observer
+        val observer = object : Observer<String> {
+            override fun onSubscribe(d: Disposable?) {
+
+            }
+
+            override fun onNext(string: String?) {
+                println(string)
+            }
+
+            override fun onError(e: Throwable) {
+                println("Whoops：" + e.message)
+            }
+
+            override fun onComplete() {
+                println("Completed Observable.")
+            }
         }
     }
 }
