@@ -30,5 +30,11 @@ class MainActivity : AppCompatActivity() {
                     println("Completed Observable.")
                 }
             })
+
+        //FromArray
+        val list = listOf("John", "Marry")
+        val listObservable = Observable.fromArray(list)
+
+        val justObservable = Observable.fromArray("John", "Marry")
     }
 }
