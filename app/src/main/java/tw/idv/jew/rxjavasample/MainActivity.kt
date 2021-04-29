@@ -81,5 +81,37 @@ class MainActivity : AppCompatActivity() {
         }, {    //onError
         }, {    //onComplete
         })
+
+        //Disposable
+        var disposable: Disposable? = null
+
+        val dObserver = object : Observer<String> {
+            override fun onSubscribe(d: Disposable?) {
+                disposable = d
+            }
+
+            override fun onNext(string: String?) {
+                println(string)
+            }
+
+            override fun onError(e: Throwable) {
+                println("Whoops：" + e.message)
+            }
+
+            override fun onComplete() {
+                println("Completed Observable.")
+            }
+        }
+        //Call when you don't need to observe anymore
+        disposable?.dispose()
+
+        //簡化Disposable
+        val sDisposable = Observable
+                .just(1, 2, 3)
+                .subscribe {
+                    println(it)
+                }
+        //Call when you don't need to observe anymore
+        sDisposable?.dispose()
     }
 }
