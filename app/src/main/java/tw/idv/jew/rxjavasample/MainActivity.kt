@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
 
@@ -113,5 +114,18 @@ class MainActivity : AppCompatActivity() {
                 }
         //Call when you don't need to observe anymore
         sDisposable?.dispose()
+
+        //CompositeDisposable
+        //init once
+        val compositeDisposable = CompositeDisposable()
+
+        for (i in 0..100){
+            val disposable = Observable
+                    .just(1, 2, 3)
+                    .subscribe()
+            compositeDisposable.add(disposable)
+        }
+        //Call when you don't need to observe anymore
+        compositeDisposable.dispose()
     }
 }
