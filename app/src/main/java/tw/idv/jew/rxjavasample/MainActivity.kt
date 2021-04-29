@@ -127,5 +127,19 @@ class MainActivity : AppCompatActivity() {
         }
         //Call when you don't need to observe anymore
         compositeDisposable.dispose()
+
+        //Operator：map、filter...
+        /*val observable = Observable.just(1, 2, 3)
+        val mapObservable = observable.map { it * 2 }
+        mapObservable.subscribe {
+            println(it)
+        }*/
+        Observable
+                .just(1, 2, 3)
+                .filter { it%2 == 1 }
+                .map { it * 2 }
+                .subscribe {
+                    println(it)
+                }
     }
 }
