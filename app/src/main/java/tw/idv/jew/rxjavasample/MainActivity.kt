@@ -2,11 +2,14 @@ package tw.idv.jew.rxjavasample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.lang.Exception
+import javax.security.auth.Subject
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,6 +143,20 @@ class MainActivity : AppCompatActivity() {
                 .map { it * 2 }
                 .subscribe {
                     println(it)
+                }
+
+        //Subject
+        val errorSubject = PublishSubject.create<Unit>()
+        fun apiA(){
+            errorSubject.onNext(Unit)
+        }
+        fun apiB(){
+            errorSubject.onNext(Unit)
+        }
+        errorSubject
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    //show Error
                 }
     }
 }
